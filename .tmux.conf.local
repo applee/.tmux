@@ -263,3 +263,55 @@ tmux_conf_copy_to_os_clipboard=false
 
 # move status line to top
 #set -g status-position top
+unbind C-b
+unbind C-a
+set -g prefix C-q
+bind C-q send-prefix -2
+set -g prefix2 C-q
+bind C-q send-prefix -2
+
+#tmux_conf_new_window_retain_current_path=true
+tmux_conf_theme_status_bg='colour8'
+tmux_conf_theme_window_status_bg='colour8'
+
+tmux_conf_theme_window_status_current_fg='#e4e4e4'
+tmux_conf_theme_window_status_current_bg='colour8'
+
+tmux_conf_theme_window_status_last_fg='#8a8a8a'
+tmux_conf_theme_window_status_last_bg='colour8'
+
+tmux_conf_theme_status_left_fg='#a8a8a,#8a8a8a,#e4e4e4'
+tmux_conf_theme_status_left_bg='colour8,colour8,colour8'
+
+tmux_conf_theme_status_right_fg='#8a8a8a,#8a8a8a,#8a8a8a'
+tmux_conf_theme_status_right_bg='colour8,colour8,colour8'
+
+
+tmux_conf_battery_status_charging='⚡'
+tmux_conf_battery_status_discharging='🔋'
+
+# key bindings for horizontal and vertical panes
+unbind %
+bind C-v split-window -h -c "#{pane_current_path}"      # 使用|竖屏，方便分屏
+unbind '"'
+bind C-s split-window -v -c "#{pane_current_path}"      # 使用-横屏，方便分屏
+
+# List of plugins
+set -g @tpm_plugins '           \
+   tmux-plugins/tpm             \
+   tmux-plugins/tmux-sensible   \
+   tmux-plugins/tmux-resurrect  \
+'
+# set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin 'tmux-plugins/tmux-sensible'
+# set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+# tmux-resurrect
+set -g @resurrect-save-bash-history 'on'
+set -g @resurrect-capture-pane-contents 'on'
+set -g @resurrect-strategy-vim 'session'
+set -g @resurrect-save 'S'
+set -g @resurrect-restore 'R'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
